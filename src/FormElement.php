@@ -117,7 +117,7 @@ abstract class FormElement
                     $this->addLabelClass($class);
                 }
             } else {
-                $this->addLabelClass($configuration['labellass']);
+                $this->addLabelClass($configuration['labelClass']);
             }
         }
         if (isset($configuration['default'])) {
