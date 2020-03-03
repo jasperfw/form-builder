@@ -1,6 +1,6 @@
 <?php
 
-namespace JasperFW\DataInterfaceTest\FormBuilder;
+namespace JasperFW\FormBuilderTest;
 
 use Exception;
 use JasperFW\FormBuilder\Exception\FormStructureException;

@@ -1,6 +1,6 @@
 <?php
 
-namespace JasperFW\DataInterfaceTest\FormBuilder\FormElement;
+namespace JasperFW\FormBuilderTest\FormElement;
 
 use JasperFW\FormBuilder\FormElement\Datefield;
 use JasperFW\Validator\Validator\TextString;

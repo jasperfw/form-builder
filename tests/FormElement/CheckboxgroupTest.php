@@ -1,8 +1,7 @@
 <?php
 
-namespace JasperFW\DataInterfaceTest\FormBuilder\FormElement;
+namespace JasperFW\FormBuilder\FormElement;
 
-use JasperFW\FormBuilder\FormElement\Checkboxgroup;
 use JasperFW\Validator\Validator\TextString;
 use PHPUnit\Framework\TestCase;
 

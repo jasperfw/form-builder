@@ -1,6 +1,6 @@
 <?php
 
-namespace JasperFW\DataInterfaceTest\FormBuilder\FormElement;
+namespace JasperFW\FormBuilderTest\FormElement;
 
 use JasperFW\FormBuilder\FormElement\Password;
 use JasperFW\Validator\Validator\TextString;
