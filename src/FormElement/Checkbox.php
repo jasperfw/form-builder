@@ -112,4 +112,9 @@ class Checkbox extends Input
             $this->userValue = 0;
         }
     }
+    
+    public function afterPopulate(): void
+    {
+        // TODO: This?
+    }
 }
