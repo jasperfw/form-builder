@@ -248,7 +248,7 @@ class Select extends FormElement
         }
         foreach ($this->options as $val => $txt) {
             if (in_array($val, $this->hidden)) {
-                break;
+                continue;
             }
             $disabled = (in_array($val, $this->disabled)) ? ' disabled="disabled"' : '';
             $selected = ($this->selected == $val) ? ' selected="selected"' : '';
