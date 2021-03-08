@@ -164,9 +164,9 @@ abstract class FormElement
             $this->setTemplate($configuration['template']);
         }
         if (null != $this->validator) {
-            $this->filters[] = Trim::class;
+            $this->filters[] = new Trim();
             if (!isset($configuration['stripTags']) || $configuration['stripTags'] === false) {
-                $this->filters[] = StripTags::class;
+                $this->filters[] = new StripTags();
             }
         }
     }
