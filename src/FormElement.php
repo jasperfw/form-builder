@@ -84,9 +84,7 @@ abstract class FormElement
             $this->attributes['id'] = $configuration['id'];
         }
         // Set up the validator
-        if (isset($configuration['validator']) &&
-            null != $configuration['validator'] &&
-            false != $configuration['validator']) {
+        if (isset($configuration['validator']) && false !== $configuration['validator']) {
             $field_filters = (isset($configuration['filters'])) ? $configuration['filters'] : [];
             $field_constraints = (isset($configuration['constraints'])) ? $configuration['constraints'] : [];
             $this->setValidator($configuration['validator'], $field_filters, $field_constraints);
@@ -176,9 +174,9 @@ abstract class FormElement
      *
      * @param string $name
      *
-     * @return null|string
+     * @return string|Validator|null
      */
-    public function __get(string $name): ?string
+    public function __get(string $name): string|Validator|null
     {
         if ($name === 'validator') {
             return $this->validator;
@@ -362,7 +360,7 @@ abstract class FormElement
         array $filters = [],
         array $constraints = []
     ): FormElement {
-        $this->validator = $validatorClassName;
+        $this->validator = new $validatorClassName;
         $this->filters = $filters;
         $this->constraints = $constraints;
         return $this;
@@ -377,7 +375,6 @@ abstract class FormElement
      */
     public function setRequired(bool $required): FormElement
     {
-        $required = (bool)$required;
         $this->required = $required;
         return $this;
     }
@@ -460,11 +457,11 @@ abstract class FormElement
      * in the database query. To unset the dbname, simply set the value to null. If this field should not be submitted
      * to the database, set the value to false.
      *
-     * @param string|null|bool $name
+     * @param bool|string|null $name
      *
      * @return self
      */
-    public function setDBName($name): FormElement
+    public function setDBName(bool|string|null $name): FormElement
     {
         $this->dbName = $name;
         return $this;
@@ -529,7 +526,7 @@ abstract class FormElement
      *
      * @return mixed
      */
-    public function getValue()
+    public function getValue(): mixed
     {
         if (null == $this->isValid && null != $this->userValue) {
             $this->validate();
@@ -552,7 +549,7 @@ abstract class FormElement
      *
      * @return mixed
      */
-    public function getDefaultValue()
+    public function getDefaultValue(): mixed
     {
         return $this->defaultValue;
     }
@@ -564,7 +561,7 @@ abstract class FormElement
      *
      * @return self
      */
-    public function setDefaultValue($value): FormElement
+    public function setDefaultValue(mixed $value): FormElement
     {
         $this->defaultValue = $value;
         // If valid input was entered already, check if this value is different.
@@ -579,7 +576,7 @@ abstract class FormElement
      *
      * @return mixed
      */
-    public function getUserValue()
+    public function getUserValue(): mixed
     {
         if (null == $this->isValid) {
             $this->validate();
@@ -613,7 +610,7 @@ abstract class FormElement
      *
      * @return mixed
      */
-    public function getRawValue()
+    public function getRawValue(): mixed
     {
         return $this->userValue;
     }
@@ -627,7 +624,7 @@ abstract class FormElement
             if (null === $this->userValue && null !== $this->defaultValue) {
                 // There is a preset value, and its not being changed
                 $this->isValid = true;
-            } elseif (null != $this->validator && false != $this->validator) {
+            } elseif (null !== $this->validator && false !== $this->validator) {
                 if ('' === $this->userValue && false === $this->required) {
                     $this->isValid = true;
                     return;

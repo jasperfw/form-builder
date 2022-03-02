@@ -31,7 +31,7 @@ class Checkboxgroup extends Radiobutton
      *
      * @return FormElement
      */
-    public function setDefaultValue($value): FormElement
+    public function setDefaultValue(mixed $value): FormElement
     {
         if (is_array($value)) {
             $value = implode(',', $value);

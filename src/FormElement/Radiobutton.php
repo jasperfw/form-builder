@@ -11,7 +11,7 @@ namespace JasperFW\FormBuilder\FormElement;
  */
 class Radiobutton extends Select
 {
-    protected $addBlank = false;
+    protected bool $addBlank = false;
 
     /**
      * Create a new select with an optional list of options.

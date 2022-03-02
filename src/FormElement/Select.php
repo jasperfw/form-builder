@@ -16,12 +16,12 @@ use JasperFW\Validator\Exception\BadDefinitionException;
  */
 class Select extends FormElement
 {
-    protected $options = [];
-    protected $hidden = [];
-    protected $selected = '';
-    protected $disabled = [];
-    protected $addBlank = false;
-    protected $blankText = '';
+    protected array $options = [];
+    protected array $hidden = [];
+    protected string $selected = '';
+    protected array $disabled = [];
+    protected bool $addBlank = false;
+    protected mixed $blankText = '';
 
     /**
      * Create a new select with an optional list of options.
@@ -154,9 +154,7 @@ class Select extends FormElement
      */
     public function setOptions(array $options): void
     {
-        if (is_array($options)) {
-            $this->options = $options;
-        }
+        $this->options = $options;
     }
 
     /**

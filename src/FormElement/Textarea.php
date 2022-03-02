@@ -13,7 +13,7 @@ use JasperFW\FormBuilder\FormElement;
  */
 class Textarea extends FormElement
 {
-    protected $value;
+    protected string $value;
 
     /**
      * @param string $name

@@ -16,11 +16,11 @@ use JasperFW\FormBuilder\FormElement;
 class CSRFToken extends Hidden
 {
     /** @var string The previous CSRF value */
-    protected $oldCSRF;
+    protected mixed $oldCSRF;
     /** @var string The new CSRF value */
-    protected $newCSRF;
+    protected string $newCSRF;
     /** @var string The CSRF value that was submitted with the form */
-    protected $submittedCSRF;
+    protected string $submittedCSRF;
 
     public function __construct(string $name, array $configuration = [], string $value = '')
     {
