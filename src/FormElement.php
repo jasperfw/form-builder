@@ -18,57 +18,57 @@ use JasperFW\Validator\Validator\Validator;
  */
 abstract class FormElement
 {
-    protected $attributes = [
+    protected array $attributes = [
         'id' => '',
     ];
-    /** @var string The label text for this field */
-    protected $label = null;
+    /** @var string|null The label text for this field */
+    protected ?string $label = null;
     /** @var string[] Array of classes to be applied to the label */
-    protected $labelClasses = [];
-    /** @var Validator $validator */
-    protected $validator = null;
+    protected array $labelClasses = [];
+    /** @var Validator|null $validator */
+    protected ?Validator $validator = null;
     /** @var array Array of filters to pass to the validator */
-    protected $filters = [];
+    protected array $filters = [];
     /** @var array Array of constraints to pass the validator */
-    protected $constraints = [];
+    protected array $constraints = [];
     /** @var mixed The default value or the value from the database */
-    protected $defaultValue = null;
+    protected mixed $defaultValue = null;
     /** @var mixed The user submited value */
-    protected $userValue = null;
+    protected mixed $userValue = null;
     /** @var string|null|bool The name of the value in the database */
-    protected $dbName = null;
+    protected string|bool|null $dbName = null;
     /** @var string|null The name of the value to request from the database (good for when the value is being cast) */
-    protected $selectName = null;
+    protected ?string $selectName = null;
     /** @var null|bool True or false based on validity, or null if the value has not been checked yet. */
-    protected $isValid = null;
+    protected ?bool $isValid = null;
     /** @var bool True if this element is a property of an object, and is contained in the objects db row */
-    protected $isProperty = true;
+    protected bool $isProperty = true;
     /** @var null|string The error message to be displayed */
-    protected $error = null;
+    protected ?string $error = null;
     /** @var array Array of classes for the error text span */
-    protected $errorClasses = [];
+    protected array $errorClasses = [];
     /** @var bool True if this field must have a value that is not empty */
-    protected $required = true;
+    protected bool $required = true;
     /** @var string The default error message to display */
-    protected $defaultError = 'The entered value is not valid.';
+    protected string $defaultError = 'The entered value is not valid.';
     /** @var Form|null Reference to the form this element is contained in */
-    protected $form = null;
+    protected ?Form $form = null;
     /** @var bool True if the form field has been changed (a valid value different from the default was set) */
-    protected $isChanged = false;
+    protected bool $isChanged = false;
     /** @var bool If true, if the valid value of this field is empty, null is returned instead of '' */
-    protected $nullOnEmpty = false;
+    protected bool $nullOnEmpty = false;
     /** @var string The type of value, string, int, float. */
-    protected $type = 'string';
+    protected string $type = 'string';
     /** @var bool If true, displays normally. If false, outputs as plain text instead of a form element */
-    protected $editable = true;
+    protected bool $editable = true;
     /** @var array The list of classes that will be put into the list */
-    protected $classes = [];
+    protected array $classes = [];
     /** @var string The help or assistive text to display for the element */
-    protected $helpText;
+    protected string $helpText;
     /** @var string[] Array of classes for the help text */
-    protected $helpTextClasses = [];
+    protected array $helpTextClasses = [];
     /** @var string The template that sets how the parts of this form element will be ordered. */
-    protected $template;
+    protected string $template;
 
     /**
      * The protected constructor will prevent this parent class from being instantiated.

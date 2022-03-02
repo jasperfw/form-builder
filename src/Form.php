@@ -13,6 +13,7 @@ use JasperFW\FormBuilder\FormElement\Hidden;
 use JasperFW\FormBuilder\FormElement\HiddenVisible;
 use JasperFW\FormBuilder\FormElement\StaticValue;
 use JasperFW\Validator\Exception\BadDefinitionException;
+use JetBrains\PhpStorm\Pure;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
@@ -37,12 +38,12 @@ class Form extends Collection
     /** @var string Use this to specify the default input template */
     const TEMPLATE_DEFAULT = '0';
     /** @var array All of the forms in the current request, because why not (and for CSRF stuff) */
-    protected static $forms = [];
+    protected static array $forms = [];
     /**
      * @var array The structure of the form, used for autocreating the form elements.
      */
-    protected static $structure;
-    protected static $templates = [
+    protected static array $structure;
+    protected static array $templates = [
         0 => ':label: :field:',
         1 => ':label: :field: :error:<br />',
         2 => '<div id="div_:fieldname:">:label: :field: :helptext: :error:</div>',
@@ -52,11 +53,11 @@ class Form extends Collection
      * @var string The name of this form, in case there are multiple forms on the page. This will be used in naming the
      *      CSRF token for the form.
      */
-    protected $name;
+    protected string $name;
     /** @var CallbackDefinition[] Callbacks to call after populate */
-    protected $postPopulateCallbacks = [];
+    protected array $postPopulateCallbacks = [];
     /** @var array Array of attributes to add to the form element */
-    protected $attributes = [
+    protected array $attributes = [
         'accept-charset' => 'UNKNOWN',
         'action' => '',
         'autocomplete' => 'on',
@@ -65,33 +66,33 @@ class Form extends Collection
         'class' => '',
     ];
     /** @var null|string Template for a full form element, label, help text, etc */
-    protected $template = null;
+    protected ?string $template = null;
     /** @var null|string Template for a form element's label */
-    protected $labelTemplate = null;
+    protected ?string $labelTemplate = null;
     /** @var null|string Template for a form element's INPUT, SELECT, etc tag */
-    protected $fieldTemplate = null;
+    protected ?string $fieldTemplate = null;
     /** @var null|string Template for a form element error message */
-    protected $errorTemplate = null;
+    protected ?string $errorTemplate = null;
     /** @var array A list of errors, primarily from validation. */
-    protected $errors = [];
+    protected array $errors = [];
     /** @var bool True if CSRF protection is enabled. */
-    protected $csrfEnabled = true;
-    /** @var LoggerInterface A logger to record issues. */
-    protected $logger;
+    protected bool $csrfEnabled = true;
+    /** @var LoggerInterface|NullLogger A logger to record issues. */
+    protected LoggerInterface|NullLogger $logger;
     /** @var string[] Array of classes to be added to all element tags in the form */
-    protected $allElementsClasses = [];
+    protected array $allElementsClasses = [];
     /** @var string[] Array of classes to be added to all help text spans in the form */
-    protected $allHelpTextClasses = [];
+    protected array $allHelpTextClasses = [];
     /** @var string[] Array of classes to be added to all labels in the form */
-    protected $allLabelClasses = [];
+    protected array $allLabelClasses = [];
     /** @var string[] Array of classes to be added to all error spans in the form */
-    protected $allErrorClasses = [];
+    protected array $allErrorClasses = [];
     /** @var bool True if the CSRF token has been initialized by a form in this request. */
-    private $csrfTokenInitialized = false;
+    private bool $csrfTokenInitialized = false;
     /** @var string The previous CSRF token to validate against */
-    private $oldCsrfToken;
+    private string $oldCsrfToken;
     /** @var string The new CSRF token for forms displayed in this request */
-    private $newCsrfToken;
+    private string $newCsrfToken;
 
     /**
      * Creates a new form object from the passed structure array. See the documentation for details about valid
@@ -210,7 +211,7 @@ class Form extends Collection
         return $this;
     }
 
-    public function addItem($object, ?string $key = null): void
+    public function addItem($object, string|int|null $key = null): void
     {
         // Do nothing
     }
@@ -464,7 +465,7 @@ class Form extends Collection
      * @return bool|string The errors, or false if no errors were generated.
      * @throws Exception
      */
-    public function getErrorString(): string
+    #[Pure] public function getErrorString(): string
     {
         $errors = $this->getErrors();
         if (count($errors) == 0) {
@@ -488,17 +489,11 @@ class Form extends Collection
         foreach ($this->members as $key => $member) {
             if ($member->isProperty()) {
                 if (true === $for_database) {
-                    switch ($member->getType()) {
-                        case 'int':
-                            $data[$member->getDBName()] = (int)$member->getValue();
-                            break;
-                        case 'float':
-                            $data[$member->getDBName()] = number_format((float)$member->getValue(), 2);
-                            break;
-                        case 'string':
-                        default:
-                            $data[$member->getDBName()] = $member->getValue();
-                    }
+                    $data[$member->getDBName()] = match ($member->getType()) {
+                        'int' => (int)$member->getValue(),
+                        'float' => number_format((float)$member->getValue(), 2),
+                        default => $member->getValue(),
+                    };
                 } else {
                     $data[$key] = $member->getValue();
                 }

@@ -16,7 +16,7 @@ class Button extends Input
      * @param array  $configuration
      * @param string $value
      */
-    public function __construct($name, $configuration = [], $value = '')
+    public function __construct(string $name, array $configuration = [], string $value = '')
     {
         parent::__construct($name, $configuration, 'button', $value);
         if (isset($configuration['onClick'])) {
