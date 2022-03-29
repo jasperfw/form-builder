@@ -50,10 +50,10 @@ class Form extends Collection
         3 => '<div class=":fieldname:">:label: :field: :helptext: :error:</div>',
     ];
     /**
-     * @var string The name of this form, in case there are multiple forms on the page. This will be used in naming the
-     *      CSRF token for the form.
+     * @var string|null The name of this form, in case there are multiple forms on the page. This will be used in
+     *      naming the CSRF token for the form.
      */
-    protected string $name;
+    protected ?string $name = null;
     /** @var CallbackDefinition[] Callbacks to call after populate */
     protected array $postPopulateCallbacks = [];
     /** @var array Array of attributes to add to the form element */
