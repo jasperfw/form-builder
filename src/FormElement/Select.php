@@ -18,7 +18,7 @@ class Select extends FormElement
 {
     protected array $options = [];
     protected array $hidden = [];
-    protected string $selected = '';
+    protected ?string $selected = null;
     protected array $disabled = [];
     protected bool $addBlank = false;
     protected mixed $blankText = '';
