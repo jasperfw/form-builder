@@ -14,7 +14,7 @@ use JasperFW\FormBuilder\FormElement;
  */
 class Checkboxgroup extends Radiobutton
 {
-    protected $checked = [];
+    protected array $checked = [];
 
     /**
      *  Reset the checked options by unchecking all items.

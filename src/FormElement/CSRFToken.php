@@ -19,8 +19,8 @@ class CSRFToken extends Hidden
     protected mixed $oldCSRF;
     /** @var string The new CSRF value */
     protected string $newCSRF;
-    /** @var string The CSRF value that was submitted with the form */
-    protected string $submittedCSRF;
+    /** @var string|null The CSRF value that was submitted with the form */
+    protected ?string $submittedCSRF = null;
 
     public function __construct(string $name, array $configuration = [], string $value = '')
     {

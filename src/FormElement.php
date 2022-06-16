@@ -64,11 +64,11 @@ abstract class FormElement
     /** @var array The list of classes that will be put into the list */
     protected array $classes = [];
     /** @var string The help or assistive text to display for the element */
-    protected string $helpText;
+    protected string $helpText = '';
     /** @var string[] Array of classes for the help text */
     protected array $helpTextClasses = [];
-    /** @var string The template that sets how the parts of this form element will be ordered. */
-    protected string $template;
+    /** @var string|null The template that sets how the parts of this form element will be ordered. */
+    protected ?string $template = null;
 
     /**
      * The protected constructor will prevent this parent class from being instantiated.
