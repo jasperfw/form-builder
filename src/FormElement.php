@@ -360,7 +360,7 @@ abstract class FormElement
         array $filters = [],
         array $constraints = []
     ): FormElement {
-        $this->validator = new $validatorClassName;
+        $this->validator = new $validatorClassName($this->name);
         $this->filters = $filters;
         $this->constraints = $constraints;
         return $this;
